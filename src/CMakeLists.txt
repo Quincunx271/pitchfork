@@ -4,6 +4,12 @@ add_library(
     pf/fs.cpp
     pf/pitchfork.hpp
     pf/pitchfork.cpp
+    pf/cmake.hpp
+    pf/cmake.cpp
+    pf/cmake/configure.hpp
+    pf/cmake/configure.cpp
+    pf/cmake/params.hpp
+    pf/cmake/params.cpp
     pf/new.hpp
     pf/new.cpp
     pf/new/params.hpp
