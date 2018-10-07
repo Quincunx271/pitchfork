@@ -15,4 +15,8 @@ function(pf_add_test_exe name)
     catch_discover_tests(${name} TEST_PREFIX ${name}::)
 endfunction()
 
-pf_add_test_exe(generate generate.cpp)
+pf_add_test_exe(
+    generate
+    generate.cpp
+    cmake/configure.cpp
+    )

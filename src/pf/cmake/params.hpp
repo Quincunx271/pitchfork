@@ -2,22 +2,44 @@
 #define PF_CMAKE_CONFIGURE_PARAMS_HPP_INCLUDED
 
 #include <string>
+#include <vector>
 
 #include <pf/fs.hpp>
 
 namespace pf {
 namespace cmake {
 
+enum class standard_version {
+    v98,
+    v03,
+    v11,
+    v14,
+    v17,
+    v20,
+};
+
+enum class build_type {
+    empty,
+    debug,
+    release,
+    relwithdebinfo,
+    minsizerel,
+};
+
+// Ideally, these params should match closely the VSCode CMake Tools extension
 struct configure_params {
-    std::string name;
-    std::string root_namespace;
-    std::string first_file_stem;
-    fs::path    directory;
-    bool        separate_headers   = false;
-    bool        create_third_party = true;
-    bool        create_examples    = true;
-    bool        create_extras      = false;
-    bool        create_tests       = true;
+    fs::path cmake_exe;
+
+    std::string project_name;
+
+    fs::path source_directory;
+    fs::path build_directory;
+
+    std::string      generator;
+    standard_version version;
+    build_type       _build_type;
+
+    std::vector<std::string> extra_args;
 };
 
 }  // namespace cmake
