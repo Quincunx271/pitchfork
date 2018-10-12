@@ -15,15 +15,19 @@ matrix:
     #         - clang-5.0
     #   env: COMPILER='clang++-5.0'
     - os: linux
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-8
-      env: COMPILER='g++-8'
+      # compiler: gcc
+      # addons:
+      #   apt:
+      #     sources:
+      #       - ubuntu-toolchain-r-test
+      #     packages:
+      #       - g++-8
+      # env: COMPILER='g++-8'
     - os: windows
+
+install:
+  - travis_retry wget https://cmake.org/files/v3.12/cmake-3.12.3-Linux-x86_64.sh
+  - sh ./cmake-3.12.3-Linux-x86_64.sh --help
 
 script:
   - mkdir build && cd build
