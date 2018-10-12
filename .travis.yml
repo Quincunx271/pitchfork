@@ -1,6 +1,8 @@
 sudo: false
 language: cpp
 
+python: 3
+
 matrix:
   include:
     - os: linux
@@ -12,11 +14,11 @@ matrix:
             - llvm-toolchain-trusty-7
           packages:
             - g++-8 # For updated libstdc++
-            - clang-7.0
+            - clang-7
             - ninja-build
       env:
-        CC='clang-7.0'
-        CXX='clang++-7.0'
+        C_COMPILER=clang-7
+        CXX_COMPILER=clang++-7
         BUILD_TYPE=Debug
     - os: linux
       compiler: gcc
@@ -28,8 +30,8 @@ matrix:
             - g++-8
             - ninja-build
       env:
-        CC='gcc-8'
-        CXX='g++-8'
+        C_COMPILER=gcc-8
+        CXX_COMPILER=g++-8
         BUILD_TYPE=Debug
 
 install:
@@ -38,13 +40,13 @@ install:
   - set PATH="$HOME/bin:$PATH"
   - cmake --version
 
-  - pip3 install --user conan
-
 script:
   - mkdir build && cd build
   - cmake .. -GNinja
     -DCMAKE_BUILD_TYPE=$BUILD_TYPE
-    -DCMAKE_CXX_COMPILER=$(which $CXX)
-    -DCMAKE_C_COMPILER=$(which $C)
+    -DCMAKE_C_COMPILER=$C_COMPILER
+    -DCMAKE_CXX_COMPILER=$CXX_COMPILER
+    -DCMAKE_CXX_STANDARD=17
+    -DCMAKE_CXX_EXTENSIONS=OFF
   - cmake --build . -j
   - ctest --output-on-failure -j3
