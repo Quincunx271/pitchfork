@@ -38,6 +38,8 @@ install:
   - set PATH="$HOME/bin:$PATH"
   - cmake --version
 
+  - pip3 install --user conan
+
 script:
   - mkdir build && cd build
   - cmake .. -GNinja
