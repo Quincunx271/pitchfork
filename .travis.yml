@@ -1,0 +1,31 @@
+sudo: false
+language: cpp
+
+matrix:
+  include:
+    # - os: linux
+    #   compiler: clang
+    #   addons:
+    #     apt:
+    #       sources:
+    #         - ubuntu-toolchain-r-test
+    #         - llvm-toolchain-trusty-5.0
+    #       packages:
+    #         - g++-7 # Gets newer version of libstdc++ hopefully
+    #         - clang-5.0
+    #   env: COMPILER='clang++-5.0'
+    - os: linux
+      compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-5.0
+          packages:
+            - g++-8
+      env: COMPILER='g++-8'
+    - os: windows
+
+script:
+  - mkdir build && cd build
+  - cmake --version
