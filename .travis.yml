@@ -23,11 +23,11 @@ matrix:
       #     packages:
       #       - g++-8
       # env: COMPILER='g++-8'
-    - os: windows
 
 install:
   - travis_retry wget https://cmake.org/files/v3.12/cmake-3.12.3-Linux-x86_64.sh
-  - sh ./cmake-3.12.3-Linux-x86_64.sh --help
+  - sh ./cmake-3.12.3-Linux-x86_64.sh --prefix=$HOME/bin
+  - ls $HOME/bin
 
 script:
   - mkdir build && cd build
