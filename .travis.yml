@@ -1,5 +1,5 @@
 sudo: false
-# language: cpp
+language: shell
 
 matrix:
   include:
@@ -20,7 +20,6 @@ matrix:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty-5.0
           packages:
             - g++-8
       env: COMPILER='g++-8'
