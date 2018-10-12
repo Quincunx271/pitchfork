@@ -5,6 +5,7 @@ python: 3
 
 matrix:
   include:
+
     - os: linux
       compiler: clang
       addons:
@@ -20,6 +21,7 @@ matrix:
         C_COMPILER=clang-7
         CXX_COMPILER=clang++-7
         BUILD_TYPE=Debug
+
     - os: linux
       compiler: gcc
       addons:
@@ -49,4 +51,4 @@ script:
     -DCMAKE_CXX_STANDARD=17
     -DCMAKE_CXX_EXTENSIONS=OFF
   - cmake --build . -j
-  - ctest --output-on-failure -j3
+  - ctest --output-on-failure
