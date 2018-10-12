@@ -3,17 +3,21 @@ language: cpp
 
 matrix:
   include:
-    # - os: linux
-    #   compiler: clang
-    #   addons:
-    #     apt:
-    #       sources:
-    #         - ubuntu-toolchain-r-test
-    #         - llvm-toolchain-trusty-5.0
-    #       packages:
-    #         - g++-7
-    #         - clang-5.0
-    #   env: COMPILER='clang++-5.0'
+    - os: linux
+      compiler: clang
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-7
+          packages:
+            - g++-8 # For updated libstdc++
+            - clang-7.0
+            - ninja-build
+      env:
+        CC='clang-7.0'
+        CXX='clang++-7.0'
+        BUILD_TYPE=Debug
     - os: linux
       compiler: gcc
       addons:
@@ -23,7 +27,6 @@ matrix:
           packages:
             - g++-8
             - ninja-build
-            - python3
       env:
         CC='gcc-8'
         CXX='g++-8'
