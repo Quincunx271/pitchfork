@@ -46,9 +46,11 @@ install:
   # Install conan (travis needs this, normally unneeded, since PMM would handle it)
   - pip3 install conan --user
   - conan --version
+  # Install conan dependencies
+  - mkdir build && cd build
+  - conan install ..
 
 script:
-  - mkdir build && cd build
   - cmake .. -GNinja
     -DCMAKE_BUILD_TYPE=$BUILD_TYPE
     -DCMAKE_C_COMPILER=$C_COMPILER
