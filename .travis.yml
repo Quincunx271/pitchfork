@@ -45,19 +45,20 @@ install:
   - sh ./cmake-3.12.3-Linux-x86_64.sh --prefix=$HOME --skip-license
   - set PATH="$HOME/bin:$PATH"
   - cmake --version
-  # Install conan (travis needs this, normally unneeded, since PMM would handle it)
+  # Install conan (Travis specific; PMM handles this normally)
   - pip3 install conan --user
   - conan --version
-  # Install conan dependencies
-  - mkdir build && cd build
-  - conan install ..
 
-script:
+before_script:
+  # Configure, installing conan dependencies
+  - mkdir build && cd build
   - cmake .. -GNinja
     -DCMAKE_BUILD_TYPE=$BUILD_TYPE
     -DCMAKE_C_COMPILER=$C_COMPILER
     -DCMAKE_CXX_COMPILER=$CXX_COMPILER
     -DCMAKE_CXX_STANDARD=17
     -DCMAKE_CXX_EXTENSIONS=OFF
+
+script:
   - cmake --build . -j
   - ctest --output-on-failure
