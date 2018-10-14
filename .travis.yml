@@ -42,6 +42,12 @@ install:
   - sh ./cmake-3.12.3-Linux-x86_64.sh --prefix=$HOME --skip-license
   - set PATH="$HOME/bin:$PATH"
   - cmake --version
+  - python --version
+  - which python
+  - python3 --version
+  - which python3
+  - python2 --version
+  - which python2
 
 script:
   - mkdir build && cd build
