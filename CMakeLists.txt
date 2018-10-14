@@ -16,7 +16,6 @@ option(BUILD_SPEC "Build the Pitchfork document" ON)
 
 include(pmm.cmake)
 pmm(CONAN)
-conan_set_find_paths()
 
 # Find-package the Boost that Conan gave us
 find_package(Boost 1.68.0 REQUIRED)
