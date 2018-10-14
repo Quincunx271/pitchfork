@@ -2,9 +2,11 @@ dist: trusty
 sudo: false
 language: cpp
 
+env:
+  PYENV_VERSION=3.6
+
 matrix:
   include:
-
     - os: linux
       compiler: clang
       addons:
@@ -40,8 +42,6 @@ install:
   - sh ./cmake-3.12.3-Linux-x86_64.sh --prefix=$HOME --skip-license
   - set PATH="$HOME/bin:$PATH"
   - cmake --version
-  - pip3 install conan --user
-  - conan --version
 
 script:
   - mkdir build && cd build
