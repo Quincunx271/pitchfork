@@ -39,7 +39,7 @@ install:
   - sh ./cmake-3.12.3-Linux-x86_64.sh --prefix=$HOME --skip-license
   - set PATH="$HOME/bin:$PATH"
   - cmake --version
-  - python3 -m pip install conan --user
+  - pip install conan --user
   - conan --version
 
 script:
