@@ -30,8 +30,6 @@ auto transform_relative(fs::path const& base_dir) {
     });
 }
 
-constexpr bool smart_grouping = true;
-
 std::vector<std::string> relative_source_strings(std::vector<fs::path> const& source_files,
                                                  fs::path const&              base_dir,
                                                  pf::update_grouping          grouping) {

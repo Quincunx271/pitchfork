@@ -11,36 +11,6 @@ matrix:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-xenial-7
-          packages:
-            - g++-8 # Gets newer version of libstdc++
-            - clang-7
-      env:
-        - C_COMPILER='clang-7'
-        - CXX_COMPILER='clang++-7'
-        - BUILD_TYPE=Debug
-
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-xenial-7
-          packages:
-            - g++-8 # Gets newer version of libstdc++
-            - clang-7
-      env:
-        - C_COMPILER='clang-7'
-        - CXX_COMPILER='clang++-7'
-        - BUILD_TYPE=Release
-
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
             - llvm-toolchain-xenial-8
           packages:
             - g++-8 # Gets newer version of libstdc++
