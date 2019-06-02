@@ -5,61 +5,61 @@ language: cpp
 
 matrix:
   include:
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-xenial-7
-          packages:
-            - g++-8 # Gets newer version of libstdc++
-            - clang-7
-      env:
-        - C_COMPILER='clang-7'
-        - CXX_COMPILER='clang++-7'
-        - BUILD_TYPE=Debug
+    # - os: linux
+    #   compiler: clang
+    #   addons:
+    #     apt:
+    #       sources:
+    #         - ubuntu-toolchain-r-test
+    #         - llvm-toolchain-xenial-7
+    #       packages:
+    #         - g++-8 # Gets newer version of libstdc++
+    #         - clang-7
+    #   env:
+    #     - C_COMPILER='clang-7'
+    #     - CXX_COMPILER='clang++-7'
+    #     - BUILD_TYPE=Debug
 
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-xenial-7
-          packages:
-            - g++-8 # Gets newer version of libstdc++
-            - clang-7
-      env:
-        - C_COMPILER='clang-7'
-        - CXX_COMPILER='clang++-7'
-        - BUILD_TYPE=Release
+    # - os: linux
+    #   compiler: clang
+    #   addons:
+    #     apt:
+    #       sources:
+    #         - ubuntu-toolchain-r-test
+    #         - llvm-toolchain-xenial-7
+    #       packages:
+    #         - g++-8 # Gets newer version of libstdc++
+    #         - clang-7
+    #   env:
+    #     - C_COMPILER='clang-7'
+    #     - CXX_COMPILER='clang++-7'
+    #     - BUILD_TYPE=Release
 
-    - os: linux
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-8
-      env:
-        - C_COMPILER='gcc-8'
-        - CXX_COMPILER='g++-8'
-        - BUILD_TYPE=Debug
+    # - os: linux
+    #   compiler: gcc
+    #   addons:
+    #     apt:
+    #       sources:
+    #         - ubuntu-toolchain-r-test
+    #       packages:
+    #         - g++-8
+    #   env:
+    #     - C_COMPILER='gcc-8'
+    #     - CXX_COMPILER='g++-8'
+    #     - BUILD_TYPE=Debug
 
-    - os: linux
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-8
-      env:
-        - C_COMPILER='gcc-8'
-        - CXX_COMPILER='g++-8'
-        - BUILD_TYPE=Release
+    # - os: linux
+    #   compiler: gcc
+    #   addons:
+    #     apt:
+    #       sources:
+    #         - ubuntu-toolchain-r-test
+    #       packages:
+    #         - g++-8
+    #   env:
+    #     - C_COMPILER='gcc-8'
+    #     - CXX_COMPILER='g++-8'
+    #     - BUILD_TYPE=Release
 
     - os: osx
       osx_image: xcode10
@@ -89,6 +89,8 @@ install:
     if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       brew update
       brew upgrade cmake
+      brew upgrade clang
+      clang --version
     fi
   - |
     if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
