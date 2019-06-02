@@ -9,6 +9,8 @@ project(pitchfork
     )
 
 option(PF_FORCE_TESTS_COLOR "Force colored output in tests" OFF)
+set(PF_CONAN_SETTINGS "" CACHE STRING "Extra settings to pass to conan")
+set(PF_CONAN_OPTIONS "" CACHE STRING "Extra options to pass to conan")
 
 if(NOT CMAKE_CONFIGURATION_TYPES)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/bin")
@@ -29,7 +31,10 @@ if(CMAKE_CXX_STANDARD)
 endif()
 
 include(pmm.cmake)
-pmm(CONAN SETTINGS ${conan_std})
+pmm(CONAN
+    SETTINGS ${conan_std} ${PF_CONAN_SETTINGS}
+    OPTIONS ${PF_CONAN_OPTIONS}
+)
 conan_set_find_paths()
 
 # Find-package the dependencies that Conan gave us
