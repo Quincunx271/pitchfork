@@ -38,6 +38,36 @@ matrix:
         - CONAN_SETTINGS=compiler.version=7.0
 
     - os: linux
+      compiler: clang
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-xenial-8
+          packages:
+            - g++-8 # Gets newer version of libstdc++
+            - clang-8
+      env:
+        - C_COMPILER='clang-8'
+        - CXX_COMPILER='clang++-8'
+        - BUILD_TYPE=Debug
+
+    - os: linux
+      compiler: clang
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-xenial-8
+          packages:
+            - g++-8 # Gets newer version of libstdc++
+            - clang-8
+      env:
+        - C_COMPILER='clang-8'
+        - CXX_COMPILER='clang++-8'
+        - BUILD_TYPE=Release
+
+    - os: linux
       compiler: gcc
       addons:
         apt:
