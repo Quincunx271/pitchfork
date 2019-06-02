@@ -109,6 +109,7 @@ install:
   - pip3 install conan --user
   - conan --version
   - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
+  - which conan
   - cat ~/.conan/settings.yml
   - cp ci/conan.settings.yml ~/.conan/settings.yml
   - cat ~/.conan/settings.yml
