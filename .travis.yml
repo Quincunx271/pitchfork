@@ -1,0 +1,114 @@
+dist: xenial
+language: cpp
+
+# cache: ccache
+
+matrix:
+  include:
+    - os: linux
+      compiler: clang
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-xenial-7
+          packages:
+            - g++-8 # Gets newer version of libstdc++
+            - clang-7
+      env:
+        - C_COMPILER='clang-7'
+        - CXX_COMPILER='clang++-7'
+        - BUILD_TYPE=Debug
+
+    - os: linux
+      compiler: clang
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-xenial-7
+          packages:
+            - g++-8 # Gets newer version of libstdc++
+            - clang-7
+      env:
+        - C_COMPILER='clang-7'
+        - CXX_COMPILER='clang++-7'
+        - BUILD_TYPE=Release
+
+    - os: linux
+      compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-8
+      env:
+        - C_COMPILER='gcc-8'
+        - CXX_COMPILER='g++-8'
+        - BUILD_TYPE=Debug
+
+    - os: linux
+      compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-8
+      env:
+        - C_COMPILER='gcc-8'
+        - CXX_COMPILER='g++-8'
+        - BUILD_TYPE=Release
+
+    - os: osx
+      osx_image: xcode10
+      env:
+        - C_COMPILER=clang
+        - CXX_COMPILER=clang++
+        - PATH=$PATH:$HOME/Library/Python/3.7/bin
+        - BUILD_TYPE=Debug
+
+    - os: osx
+      osx_image: xcode10
+      env:
+        - C_COMPILER=clang
+        - CXX_COMPILER=clang++
+        - PATH=$PATH:$HOME/Library/Python/3.7/bin
+        - BUILD_TYPE=Release
+
+before_install:
+  - export CC=$C_COMPILER
+  - export CXX=$CXX_COMPILER
+  - export PYENV_VERSION=$(pyenv versions | grep '3.' | sort --reverse | head -n 1 | xargs)
+  - pyenv versions
+
+install:
+  # Install newer cmake
+  - |
+    if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+      brew update
+      brew upgrade cmake
+    fi
+  - |
+    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      travis_retry wget https://github.com/Kitware/CMake/releases/download/v3.14.4/cmake-3.14.4-Linux-x86_64.sh
+      sh ./cmake-3.14.4-Linux-x86_64.sh --prefix=$HOME --skip-license
+    fi
+  - cmake --version
+  # Install conan manually. PMM could do this, though.
+  - pip3 install conan --user
+  - conan --version
+  - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
+
+before_script:
+  # Configure, which would install dependencies via PMM
+  - mkdir build && cd build
+  - cmake ..
+    -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+    -DCMAKE_CXX_COMPILER=$CXX_COMPILER
+    -DCMAKE_C_COMPILER=$C_COMPILER
+
+script:
+  - cmake --build . -j
+  - ctest --output-on-failure
