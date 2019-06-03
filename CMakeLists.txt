@@ -55,8 +55,6 @@ if(NOT MSVC)
     endif()
 else()
     add_compile_options(/permissive-)
-    # We want to pass this flag to link.exe. In CMake 3.13, we can use add_link_options
-    # /IGNORE:4221 # LNK4221 warns for empty cpp files. We use such files.
 endif()
 
 add_subdirectory(data)
@@ -80,5 +78,10 @@ pf_auto(
     EXE_LINK
         taywee::args
     )
+
+set_property(TARGET pf pitchfork
+    APPEND PROPERTY
+    STATIC_LIBRARY_OPTIONS $<$<CXX_COMPILER_ID:MSVC>:-IGNORE:4221> # Don't warn for empty cpp files
+)
 
 include(CPack)
