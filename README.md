@@ -1,4 +1,4 @@
-# Pitchfork
+# Pitchfork [![Build status](https://ci.appveyor.com/api/projects/status/enlqq40bxapaa44y/branch/develop-q271?svg=true)](https://ci.appveyor.com/project/Quincunx271/pitchfork/branch/develop-q271)
 
 Pitchfork is a set of conventions for native C and C++ projects. The most
 prominent being [the project layout conventions](https://api.csswg.org/bikeshed/?force=1&url=https://raw.githubusercontent.com/vector-of-bool/pitchfork/develop/data/spec.bs).

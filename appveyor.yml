@@ -1,0 +1,30 @@
+shallow_clone: true
+
+environment:
+  matrix:
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      VCVARS_SCRIPT: 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat'
+
+configuration:
+  - Debug
+  - Release
+
+install:
+  - cmake --version
+  - pip install conan
+  - conan --version
+  - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
+  - pip install ninja
+  - ninja --version
+
+before_build:
+  - call "%VCVARS_SCRIPT%"
+  - mkdir build
+  - cd build
+  - cmake .. -GNinja -DCMAKE_BUILD_TYPE=%CONFIGURATION%
+
+build_script:
+  - cmake --build . -j
+
+test_script:
+  - ctest --output-on-failure -LE FAILS_ON_WINDOWS

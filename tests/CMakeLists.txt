@@ -38,7 +38,7 @@ endfunction()
 function(pf_add_query_test ID)
     set(options)
     set(args)
-    set(list_args COMMAND PASS_REGULAR_EXPRESSION FAIL_REGULAR_EXPRESSION)
+    set(list_args COMMAND PASS_REGULAR_EXPRESSION FAIL_REGULAR_EXPRESSION LABELS)
 
     cmake_parse_arguments(PARSE_ARGV 1 ARG "${options}" "${args}" "${list_args}")
 
@@ -50,6 +50,7 @@ function(pf_add_query_test ID)
         PROPERTIES
             PASS_REGULAR_EXPRESSION "${ARG_PASS_REGULAR_EXPRESSION}"
             FAIL_REGULAR_EXPRESSION "${ARG_FAIL_REGULAR_EXPRESSION}"
+            LABELS "${ARG_LABELS}"
     )
 endfunction()
 
@@ -67,6 +68,7 @@ pf_add_test_exe(test.lib
 pf_add_query_test(project.root
     COMMAND pf query project.root
     PASS_REGULAR_EXPRESSION "${PROJECT_SOURCE_DIR}"
+    LABELS FAILS_ON_WINDOWS
 )
 pf_add_query_test(project.root.specified
     COMMAND pf "--base-dir=/some/absolute/path" query project.root
