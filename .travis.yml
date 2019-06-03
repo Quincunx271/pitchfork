@@ -96,5 +96,6 @@ before_script:
 
 script:
   - cmake --build . -j
-  - gdb -ex run -ex bt -ex quit ./bin/existing
+  - gdb -ex 'set pagination off' -ex run -ex bt -ex quit ./bin/existing
+  - gdb -ex 'set pagination off' -ex run -ex bt -ex quit ./bin/lib
   - ctest --output-on-failure
