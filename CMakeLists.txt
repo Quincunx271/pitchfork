@@ -76,7 +76,7 @@ pf_auto(
         pf::templates
         range-v3
     EXE_LINK
-        taywee::args
+        CONAN_PKG::args
     )
 
 set_property(TARGET pf pitchfork
